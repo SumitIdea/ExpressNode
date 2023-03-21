@@ -20,7 +20,6 @@ router.set('views', path.join(__dirname, 'views'))
 router.set('view engine', 'ejs');
 // router.use('/', router);
 
-
 const chalk = require('chalk')
 
 const checkFileType = function (file, cb) {
@@ -49,11 +48,10 @@ var storage = multer.diskStorage({
   }
 });
 var upload = multer({
-  storage: storage, limits: { fileSize: 10000000 },
+  storage: storage, limits: { fileSize: 10000000 }, //10 MB
   fileFilter: (req, file, cb) => {
     checkFileType(file, cb);
   }}).single('img');
-
 
 
 router.get("/getphoto",  (req, res) => {
