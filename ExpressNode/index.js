@@ -46,10 +46,6 @@ app.use(function(req, res, next) {
   });
   var routes = require('./api/UserRoute');
   routes(app);
-  
-  app.use(function(req, res) {
-    res.status(404).send({ url: req.originalUrl + ' not found' })
-  });
 
 //end  
   
@@ -58,10 +54,15 @@ app.all(
     '/',
     function(req, res)
     {
-        return res.json({
-            status: true,
-            message: 'Welcome to the world of Sumit '
-        })
+      fs.readFile('./views/home.html', function(err, data) {
+        res.writeHead(200, {'Content-Type': 'text/html'});
+        res.write(data);
+        return res.end();
+      });
+        // return res.json({
+        //     status: true,
+        //     message: 'Welcome to the world of Sumit '
+        // })
     }
 )
 
